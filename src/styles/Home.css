@@ -1,0 +1,87 @@
+@keyframes fadeOutIn {
+    0% {
+        background-image: linear-gradient(to left, rgb(105, 0, 0), #ce0303ee);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.8;
+    }
+    40% {
+        background-image: linear-gradient(to left, rgb(105, 0, 0), #ce0303ee);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.1;
+    }
+    60% {
+        background-image: linear-gradient(to left, rgb(105, 0, 0), #ce0303ee);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.1;
+    }
+    100% {
+        background-image: linear-gradient(to left, rgb(105, 0, 0), #ce0303ee);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.8;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+#not {
+    animation-name: fadeOutIn;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+}
+
+:root {
+    --bs-breakpoint-sm: 450px !important;
+}
+
+#hero-title {
+    background: linear-gradient(to left, rgb(105, 0, 0), #ce0303ee);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Desktop / larger screens */
+#hero-image {
+    animation: fadeIn 7s;
+}
+#hero-subtitle-mobile {
+    display: none;
+}
+/* Mobile - target screens up to 450px wide */
+@media screen and (max-width: 450px) {
+    #hero-title {
+        background: linear-gradient(to right, rgb(135, 1, 1), #b10101);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    #hero-image {
+        display: none !important;
+    }
+    #hero-subtitle {
+        display: none;
+    }
+    #hero-subtitle-mobile {
+        display: block;
+    }
+}
+
+#hero-text {
+    min-width: 50%;
+}

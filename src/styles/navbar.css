@@ -1,0 +1,18 @@
+.navbar {
+    .navbar-brand {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+    }
+    #theme-toggle {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    .hamburger-inner,
+    .hamburger-inner:after,
+    .hamburger-inner:before {
+        background-color: var(--bs-body-color) !important;
+    }
+}
