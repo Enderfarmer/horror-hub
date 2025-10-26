@@ -7,19 +7,26 @@ import { Link } from "react-router";
 export default function Stories() {
     const [stories, setStories] = useState([]);
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const storiesRef = ref(db, "stories");
         onValue(storiesRef, (snapshot) => {
-            setStories(Object.values(snapshot.val() || {}));
+            setStories(
+                Object.entries(snapshot.val() || {}).map(([id, data]) => ({
+                    id,
+                    ...data,
+                }))
+            );
             setLoading(false);
         });
     }, []);
     if (loading) return <div className="spinner-border"></div>;
+
     return (
         <div className="container">
-            <h1 className="text-center mt-5">Whispers</h1>
+            <h1 className="mt-5 text-red fw-bold">Horror stories</h1>
             <hr />
-            <div className="d-flex flex-wrap flex-column">
+            <div className="d-flex">
                 {stories.length ? (
                     stories.map((story, index) => (
                         <div
@@ -28,23 +35,33 @@ export default function Stories() {
                         >
                             <div className="card-header d-flex justify-content-between align-items-center">
                                 <h5 className="card-title">
-                                    <Link to={`/stories/${story.id}`}>
+                                    <Link to={`/story/${story.id}`}>
                                         {story.title}
                                     </Link>{" "}
                                     {story.author && `by ${story.author}`}
                                 </h5>
-                                <Link to={`/stories/${story.id}`}>
+                                <Link to={`/story/${story.id}`}>
                                     <img
                                         src="/arrow-right.svg"
                                         alt="Go to story"
                                     />
                                 </Link>
                             </div>
-                            <div className="card-body">
-                                <h6 className="card-subtitle mb-2 text-muted">
+                            <div className="card-body d-flex flex-column justify-content-between">
+                                <span className="card-subtitle mb-2">
                                     {story.description}
-                                </h6>
-                                <p className="card-text">{story.content}</p>
+                                </span>{" "}
+                                <br />
+                                <div className="w-75 text-info">
+                                    {story.tags?.map((tag, i) => (
+                                        <span
+                                            key={`${story.id}-tag${i}`}
+                                            className="m-1"
+                                        >
+                                            #{tag}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     ))

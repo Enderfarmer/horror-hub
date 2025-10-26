@@ -1,7 +1,11 @@
 .story-card {
     min-height: 30vh;
-    @media screen and (min-width: 576px) {
-        max-width: 70% !important;
+    margin: 10px;
+    @media screen and (min-width: 451px) {
+        width: 50% !important;
+    }
+    @media screen and (max-width: 450px) {
+        width: 100% !important;
     }
 }
 .container {
