@@ -1,4 +1,4 @@
-@keyframes fadeOutIn {
+/* @keyframes fadeOutIn {
     0% {
         background-image: linear-gradient(to left, rgb(105, 0, 0), #ce0303ee);
         background-clip: text;
@@ -27,7 +27,7 @@
         -webkit-text-fill-color: transparent;
         opacity: 0.8;
     }
-}
+} */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -39,21 +39,49 @@
         opacity: 1;
     }
 }
-#not {
-    animation-name: fadeOutIn;
-    animation-duration: 15s;
-    animation-iteration-count: infinite;
+@keyframes flicker {
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 10px rgb(188, 4, 4);
+    }
+    20%,
+    24%,
+    55% {
+        opacity: 0.5;
+        text-shadow: none;
+    }
 }
 
 :root {
     --bs-breakpoint-sm: 450px !important;
 }
 
-#hero-title {
+#hero-warning {
+    animation: flicker 3s infinite;
+}
+.text-red {
     background: linear-gradient(to left, rgb(105, 0, 0), #ce0303ee);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.btn-black {
+    background: linear-gradient(to right, rgb(11, 0, 0), #000000ee);
+    color: rgb(244, 146, 146);
+    border: 1px solid rgb(114, 0, 0);
+}
+
+.btn-black:hover {
+    background: rgb(43, 0, 0);
+    color: rgb(255, 180, 180);
+    border: 1px solid rgb(180, 0, 0);
+    text-decoration: none;
 }
 
 /* Desktop / larger screens */
@@ -70,6 +98,10 @@
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        margin-left: 34px;
+    }
+    #hero-warning {
+        margin-left: 34px;
     }
     #hero-image {
         display: none !important;

@@ -3,6 +3,7 @@ import Stories from "./pages/Stories";
 import Home from "./pages/Home";
 import Wrapper from "./components/Wrapper";
 import Search from "./pages/Search";
+import Story from "./pages/Story";
 
 function App() {
     return (
@@ -16,6 +17,10 @@ function App() {
                 <Route
                     path="/stories"
                     element={<Wrapper component={<Stories />} />}
+                />
+                <Route
+                    path="/story/:id"
+                    element={<Wrapper component={<Story />} />}
                 />
                 <Route
                     path="/search"

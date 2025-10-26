@@ -1,33 +1,45 @@
 import { useEffect, useState } from "react";
 import "../styles/Home.css";
 import db from "../db";
-import { onValue, ref } from "firebase/database";
+import { limitToFirst, onValue, query, ref } from "firebase/database";
 import Search from "../components/Search";
+import { Link } from "react-router";
 
 export default function Home() {
     const [authors, setAuthors] = useState([]);
     const [tags, setTags] = useState([]);
+    const [stories, setStories] = useState([]);
     useEffect(() => {
         const authorsRef = ref(db, "authors");
         const tagsRef = ref(db, "tags");
+        const storiesRef = ref(db, "stories");
         onValue(tagsRef, (snapshot) => {
             setTags(Object.values(snapshot.val() || {}));
         });
         onValue(authorsRef, (snapshot) => {
             setAuthors(Object.values(snapshot.val() || {}));
         });
+        onValue(query(storiesRef, limitToFirst(7)), (snapshot) => {
+            setStories(
+                Object.entries(snapshot.val() || {}).map(([id, data]) => ({
+                    id,
+                    ...data,
+                }))
+            );
+        });
     }, []);
     return (
-        <div>
-            <section className="d-flex">
-                <div
-                    className="d-flex flex-column justify-content-center"
-                    id="hero-text"
-                >
-                    <h1 className="fw-bolder center p-2" id="hero-title">
-                        Do <span id="not">not</span> read this at night
+        <div id="home-page">
+            {/* <section className="d-flex vh-100 mt-4"> */}
+            <div className="d-flex">
+                <div className="d-flex flex-column" id="hero-text">
+                    <h1 id="hero-title" className="text-red fw-bolder p-1">
+                        Horrorhub <br />
                     </h1>
-                    <span className="fs-5" id="hero-subtitle">
+                    <h3 className="fw-light p-1 text-red" id="hero-warning">
+                        Do <span id="not">not</span> read this at night
+                    </h3>
+                    <span className="fs-5 mx-2" id="hero-subtitle">
                         Welcome, wanderer. <br />
                         You weren’t looking for this place — not really. <br />A
                         click here, a story there… <br />
@@ -46,6 +58,9 @@ export default function Home() {
                         (But all three of us know you won’t stop and turn
                         around.)
                     </span>
+                    <Link className="btn btn-black m-3 my-5 w-50 p-3">
+                        Dive into the unknown
+                    </Link>
                 </div>
                 <div className="w-50 p-2" id="hero-image">
                     <img
@@ -54,8 +69,44 @@ export default function Home() {
                         className="w-100"
                     />
                 </div>
+            </div>
+            <br />
+
+            {/* </section> */}
+
+            {/* <br />
+            <section>
+                <h2 className="text-red fw-bold">
+                    Dive into the unknown. <br />
+                    Your next unsettling read awaits.
+                </h2>
+                <br />
+                <div className="d-flex">
+                    {stories.length ? (
+                        stories.map((story, index) => (
+                            <div key={index} className="m-4 w-25">
+                                <div className="card-header d-flex justify-content-between align-items-center">
+                                    <h4 className="card-title">
+                                        <Link to={`/story/${story.id}`}>
+                                            {story.title}
+                                        </Link>{" "}
+                                    </h4>
+                                </div>
+                                <div className="card-body">
+                                    {story.description}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center">Everything forgotten.</p>
+                    )}
+                </div>
+                <br />
+                <br />
             </section>
-            <Search authors={authors} tags={tags} />
+            <section>
+                <Search authors={authors} tags={tags} />
+            </section> */}
         </div>
     );
 }

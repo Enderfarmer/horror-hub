@@ -16,3 +16,7 @@
         background-color: var(--bs-body-color) !important;
     }
 }
+
+.nav-link {
+    margin-left: 15px;
+}
