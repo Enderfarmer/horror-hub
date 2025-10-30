@@ -15,7 +15,10 @@ export default function Navbar() {
             <Link className="navbar-brand px-2" to="/">
                 Read me at night
             </Link>
-            <span>
+            <span className="d-flex align-items-center">
+                <Link className="nav-link" to="/search" id="search">
+                    <img src="/search.svg" alt="Search" />
+                </Link>
                 <button
                     className={`hamburger hamburger--spin ${
                         active ? "is-active" : ""
@@ -35,6 +38,7 @@ export default function Navbar() {
                     </span>
                 </button>
             </span>
+
             <div
                 className="collapse navbar-collapse border-top border-1 border-dark"
                 id="navbarSupportedContent"
