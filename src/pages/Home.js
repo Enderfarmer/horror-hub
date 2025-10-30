@@ -1,33 +1,7 @@
-import { useEffect, useState } from "react";
 import "../styles/Home.css";
-import db from "../db";
-import { limitToFirst, onValue, query, ref } from "firebase/database";
-import Search from "../components/Search";
 import { Link } from "react-router";
 
 export default function Home() {
-    const [authors, setAuthors] = useState([]);
-    const [tags, setTags] = useState([]);
-    const [stories, setStories] = useState([]);
-    useEffect(() => {
-        const authorsRef = ref(db, "authors");
-        const tagsRef = ref(db, "tags");
-        const storiesRef = ref(db, "stories");
-        onValue(tagsRef, (snapshot) => {
-            setTags(Object.values(snapshot.val() || {}));
-        });
-        onValue(authorsRef, (snapshot) => {
-            setAuthors(Object.values(snapshot.val() || {}));
-        });
-        onValue(query(storiesRef, limitToFirst(7)), (snapshot) => {
-            setStories(
-                Object.entries(snapshot.val() || {}).map(([id, data]) => ({
-                    id,
-                    ...data,
-                }))
-            );
-        });
-    }, []);
     return (
         <div id="home-page">
             {/* <section className="d-flex vh-100 mt-4"> */}
@@ -58,7 +32,10 @@ export default function Home() {
                         (But all three of us know you won’t stop and turn
                         around.)
                     </span>
-                    <Link className="btn btn-black m-3 my-5 w-50 p-3">
+                    <Link
+                        className="btn btn-black m-3 my-5 w-50 p-3"
+                        to={"/random/"}
+                    >
                         Dive into the unknown
                     </Link>
                 </div>
