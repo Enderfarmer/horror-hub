@@ -16,7 +16,10 @@ export default function Navbar() {
                 Read me at night
             </Link>
             <span className="d-flex align-items-center">
-                <Link className="nav-link" to="/search" id="search">
+                <Link to="/random" className="nav-link mx-4">
+                    Random story
+                </Link>
+                <Link className="nav-link mx-4" to="/search" id="search">
                     <img src="/search.svg" alt="Search" />
                 </Link>
                 <button

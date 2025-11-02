@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Wrapper from "./components/Wrapper";
 import Search from "./pages/Search";
 import Story from "./pages/Story";
+import Random from "./pages/Random";
 
 function App() {
     return (
@@ -25,6 +26,10 @@ function App() {
                 <Route
                     path="/search"
                     element={<Wrapper component={<Search />} />}
+                />
+                <Route
+                    path="/random"
+                    element={<Wrapper component={<Random />} />}
                 />
             </Routes>
         </Router>
