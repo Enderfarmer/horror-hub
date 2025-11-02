@@ -5,6 +5,7 @@ import db from "../db";
 import "../styles/Stories.css";
 import "../styles/Search.css";
 import SearchBar from "../components/SearchBar.js";
+import { filterStories } from "../utils.js";
 
 export default function Search() {
     const queryParam = useLocation().search.split("=")[1] || "";
@@ -22,29 +23,12 @@ export default function Search() {
             limitToFirst(10 * (timesLoadMore + 1))
         );
         get(pageQuery).then((snapshot) => {
-            const data = Object.entries(snapshot.val() || {}).map(
-                ([id, val]) => ({ id, ...val })
+            const filtered = filterStories(
+                snapshot,
+                queryParam.toLowerCase(),
+                queryParam.toLowerCase(),
+                queryParam.toLowerCase()
             );
-            const filtered = data.filter((val) => {
-                const query = queryParam.toLowerCase();
-
-                const matchAuthor = (val.author || "")
-                    .toLowerCase()
-                    .includes(query);
-                const matchTitle = (val.title || "")
-                    .toLowerCase()
-                    .includes(query);
-
-                const matchTags =
-                    Array.isArray(val.tags) &&
-                    val.tags.some(
-                        (tag) =>
-                            tag.toLowerCase().includes(query) ||
-                            tag.toLowerCase().includes(query.slice(1))
-                    );
-
-                return matchAuthor || matchTitle || matchTags;
-            });
             if (
                 filtered.length < 10 &&
                 !(timesLoadMore * 10 >= snapshot.size)
