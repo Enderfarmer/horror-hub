@@ -1,0 +1,14 @@
+.form-floating > .form-control ~ label,
+.form-floating > .form-control ~ label {
+    opacity: 0.7;
+    transition: 300ms;
+}
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    transform: none;
+    top: -47%;
+    height: auto;
+
+    opacity: 1;
+    font-size: small;
+}

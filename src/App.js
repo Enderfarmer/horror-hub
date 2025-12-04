@@ -5,6 +5,9 @@ import Wrapper from "./components/Wrapper";
 import Search from "./pages/Search";
 import Story from "./pages/Story";
 import Random from "./pages/Random";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import NewStory from "./pages/NewStory";
 
 function App() {
     return (
@@ -30,6 +33,18 @@ function App() {
                 <Route
                     path="/random"
                     element={<Wrapper component={<Random />} />}
+                />
+                <Route
+                    path="/register"
+                    element={<Wrapper component={<Register />} />}
+                />
+                <Route
+                    path="/login"
+                    element={<Wrapper component={<Login />} />}
+                />
+                <Route
+                    path="/new-story"
+                    element={<Wrapper component={<NewStory />} />}
                 />
             </Routes>
         </Router>
